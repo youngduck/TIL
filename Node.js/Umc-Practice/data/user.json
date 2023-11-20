@@ -1,0 +1,14 @@
+{
+	"second_user": {
+		"password": "1234",
+		"name": "young"
+	},
+	"third_user": {
+		"password": "1234",
+		"name": "duck"
+	},
+	"newUser": {
+		"password": "515",
+		"name": "cat"
+	}
+}

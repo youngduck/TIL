@@ -1,0 +1,105 @@
+.carouselWrap{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform: translate((-50%,-50%));
+}
+
+.wrapper {
+    width:100vw;
+    height:100vh;
+    background:black;
+}
+$s1:"";
+$s2:"";
+$s3:"";
+@for $i from 1 through 300 {
+    $s1: $s1 + random(1000)*0.1vw + " " + random(1000)*0.1vh + " " + 0 + " " + random(50)*-0.01rem + #fff;
+    $s2: $s2 + random(1000)*0.1vw + " " + random(1000)*0.1vh + " " + 0 + " " + random(50)*-0.01rem + #fff;
+    $s3: $s3 + random(1000)*0.1vw + " " + random(1000)*0.1vh + " " + 0 + " " + random(50)*-0.01rem + #fff;
+    @if $i < 300 {
+        $s1: $s1 + ",";
+        $s2: $s2 + ",";
+        $s3: $s3 + ",";
+    }
+}
+.snow {
+    border-radius: 50%;
+    opacity: 0.8;
+    position: absolute;
+    top:-100vh;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.layer1 {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter:blur(1.5px);
+    box-shadow: #{$s1};
+    animation-duration: 6s;
+}
+.layer1.a {
+    animation-delay: -3s;
+}
+@keyframes fall {
+    100% {transform: translateY(200vh); }
+}
+
+.container {
+    position: relative;
+    width: 420px;
+    height: 320px;
+    margin: 0 auto;
+    perspective: 1000px;
+  }
+  
+  .carousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform: translateZ(-346px);
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+  
+  .item {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    padding: 10px;
+    transition: transform 1s;
+  }
+  
+  .item:nth-child(1) {
+    transform: rotateY(0deg) translateZ(346px);
+  }
+  .item:nth-child(2) {
+    transform: rotateY(60deg) translateZ(346px);
+  }
+  .item:nth-child(3) {
+    transform: rotateY(120deg) translateZ(346px);
+  }
+  .item:nth-child(4) {
+    transform: rotateY(180deg) translateZ(346px);
+  }
+  .item:nth-child(5) {
+    transform: rotateY(240deg) translateZ(346px);
+  }
+  .item:nth-child(6) {
+    transform: rotateY(300deg) translateZ(346px);
+  }
+  
+  .buttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .next_button,
+  .prev_button {
+    color: #737373;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 24px;
+  }

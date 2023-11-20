@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>안녕하세요</h1>
+
+    <form onsubmit="return sendMessage()">
+      <input id="message" placeholder="enter message" />
+      <input type="submit" value="Send" />
+    </form>
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io("http://localhost:3000");
+
+      const sendMessage = () => {
+        let message = document.querySelector("#message");
+
+        console.log(message.value);
+        socket.emit("new_message", message.value);
+        return false;
+      };
+
+      fetch("http://localhost:3000/get_messages")
+        .then((res) => res.json())
+        .then((data) => {
+          const messages = document.querySelector("#messages");
+          console.log("겟메세지");
+          for (let i = 0; i < data.length; i++) {
+            let li = document.createElement("li");
+            li.id = data[i].id;
+            li.innerHTML = data[i].message;
+            messages.appendChild(li);
+          }
+        });
+
+      socket.on("new_message", (data) => {
+        console.log("server says", data);
+
+        let li = document.createElement("li");
+
+        li.innerHTML = data;
+        const messages = document.querySelector("#messages");
+        messages.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
