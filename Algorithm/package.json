@@ -1,0 +1,14 @@
+{
+	"name": "algorithm",
+	"version": "1.0.0",
+	"description": "",
+	"main": "Programmer.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"pr": "nodemon ./TEST/ProgrammersTest.js",
+		"boj": "nodemon ./TEST/BOJTest.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
