@@ -5,8 +5,8 @@
 	"main": "Programmer.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"pr": "nodemon ./TEST/ProgrammersTest.js",
-		"boj": "nodemon ./TEST/BOJTest.js"
+		"pr": "nodemon ./Z_TEST/ProgrammersTest.js",
+		"boj": "nodemon ./Z_TEST/BOJTest.js"
 	},
 	"keywords": [],
 	"author": "",
