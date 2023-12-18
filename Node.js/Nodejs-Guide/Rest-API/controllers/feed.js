@@ -24,12 +24,19 @@ exports.createPost = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
+  if (!req.file) {
+    const error = new Error("No image PROVIDED");
+    error.statusCode = 422;
+    throw error;
+  }
+  const imageUrl = req.file.path;
+  console.log(req.file, "req file!!");
   const title = req.body.title;
   const content = req.body.content;
   const post = new Post({
     title: title,
     content: content,
-    imageUrl: "images/car.png",
+    imageUrl: imageUrl,
     creator: { name: "Max" },
   });
 
