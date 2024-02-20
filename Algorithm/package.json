@@ -1,17 +1,17 @@
 {
-	"name": "algorithm",
-	"version": "1.0.0",
-	"description": "",
-	"main": "Programmer.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"pr": "nodemon ./Z_TEST/ProgrammersTest.js",
-		"boj": "nodemon ./Z_TEST/BOJTest.js"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"nodemon": "^3.0.2"
-	}
+  "name": "algorithm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Programmer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pr": "nodemon ./Z_TEST/ProgrammersTest.js",
+    "boj": "nodemon ./Z_TEST/BOJTest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
