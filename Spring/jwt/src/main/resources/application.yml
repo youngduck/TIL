@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    charset: UTF-8
+  config:
+    import: optional:file:.env
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?serverTimezone=Asia/Seoul&character_set_server=utf8mb4&collation-server=utf8mb4_general_ci&allowMultiQueries=true
+    username: ${DB_USER}
+    password: ${DB_PW}
+  devtools:
+    restart:
+      enabled: true
+
+mybatis:
+  mapper-locations: mybatis/mapper/*.xml
+  type-aliases-package: com.yd.jwt.dto
+
+com:
+  yd:
+    jwt:
+      secret-key: 2D9xQ`UVacO;.s0f)4pL[a3HkJ$iW8[YVcmIQ7K~QX!~1bRw)OrSegYNx_P)@;!c
