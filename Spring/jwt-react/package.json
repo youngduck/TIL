@@ -17,7 +17,7 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3004 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +42,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.4"
-  }
+  },
+  "proxy": "http://localhost:8084"
 }

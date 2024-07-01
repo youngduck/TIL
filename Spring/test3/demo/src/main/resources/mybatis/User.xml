@@ -1,0 +1,29 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.Dao.UserRepository">
+
+    <!-- User 매핑-->
+    <resultMap type="com.example.demo.Dto.User" id="userMap">
+        <id property="userId" column="user_id" />
+        <result property="userPw" column="user_pw" />
+        <result property="email" column="email" />
+        <result property="enabled" column="enabled" />
+        <result property="provider" column="provider" />
+        <collection property="role" ofType="string" column="role"
+            javaType="java.util.ArrayList" /> <!-- Assuming roles are stored as a comma-separated string in 'role' column -->
+    </resultMap>
+
+    <!-- 회원 등록 -->
+    <insert id="insert">
+        INSERT INTO COM_STD_YD_USER (user_id, user_pw, email, enabled, provider)
+        VALUES (#{userId}, #{userPw}, #{email}, #{enabled}, #{provider})
+    </insert>
+
+    <!-- 회원 조회 - id -->
+    <select id="login" resultMap="userMap">
+        SELECT user_id, user_pw, email, enabled, provider, role
+        FROM COM_STD_YD_USER
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

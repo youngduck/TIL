@@ -17,6 +17,8 @@ public class Users {
     private Date regDate;
     private Date updDate;
     private int enabled; // 휴면여부
+    // private String auth;
+    private String provider; // 로그인 접근 방법
 
     // 권한 목록
     List<UserAuth> authList;

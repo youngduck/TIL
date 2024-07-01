@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
         String userPw = user.getUserPw();
         String encodedPw = passwordEncoder.encode(userPw);
         user.setUserPw(encodedPw);
+        user.setProvider("일반");
         // 회원 등록
         int result = userRepository.insert(user);
 

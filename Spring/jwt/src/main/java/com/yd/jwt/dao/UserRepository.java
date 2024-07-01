@@ -1,5 +1,7 @@
 package com.yd.jwt.dao;
 
+import java.util.Optional;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +12,7 @@ import com.yd.jwt.dto.Users;
 @Mapper
 public interface UserRepository {
     // 회원 등록
-    public int insert(Users user) throws Exception;
+    public int insert(Users user);
 
     // 회원 조회
     public Users select(int userNo) throws Exception;
@@ -26,4 +28,7 @@ public interface UserRepository {
 
     // 회원 삭제
     public int delete(String userId) throws Exception;
+
+    // 회원 중복 조회
+    public Optional<Users> findById(Long userId) throws Exception;
 }

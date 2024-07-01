@@ -21,6 +21,10 @@ const Signin = () => {
     navigate("/");
   };
 
+  const CLIENT_ID = process.env.REACT_APP_REST_API_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URL;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
   return (
     <>
       <div className="text-[32px] font-bold text-center">로그인</div>
@@ -43,9 +47,14 @@ const Signin = () => {
 
         <input className="w-full text-white bg-black h-[50px]" type="submit" />
       </form>
-      <div className="w-full text-black bg-yellow-500 h-[50px] text-center leading-[50px] mb-4">
+
+      <a
+        href={KAKAO_AUTH_URL}
+        className="w-full block text-black bg-yellow-500 h-[50px] text-center leading-[50px] mb-4"
+      >
         카카오 로그인
-      </div>
+      </a>
+
       <div className="w-full text-black bg-gray-300 h-[50px] text-center leading-[50px] mb-4">
         구글 로그인
       </div>

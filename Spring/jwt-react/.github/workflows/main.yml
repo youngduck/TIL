@@ -1,0 +1,70 @@
+name: Build and Deploy React to AWS EC2
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_NAME: com_std1
+  BUCKET_NAME: com-std1-client-bucket
+  CODE_DEPLOY_APP_NAME: com_std1
+  DEPLOYMENT_GROUP_NAME: com_std1_instance
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #우분투 버전 체크
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v2
+
+      - name: Check Node v
+        run: node -v
+
+      - name: Create dotenv
+        run: |
+          touch ./.env
+          echo "REACT_APP_REST_API_KEY=${{ secrets.REACT_APP_REST_API_KEY }}" >> .env
+          echo "REACT_APP_REDIRECT_URL=${{ secrets.REACT_APP_REDIRECT_URL }}" >> .env
+
+
+      - name: Permission for dotenv
+        run: chmod +x ./.env
+        shell: bash
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: CI=false npm run build
+
+      - name: Permission for appspec.yml
+        run: chmod +x ./appspec.yml
+        shell: bash
+
+      - name: Permission for deploy.sh
+        run: chmod +x ./scripts/deploy.sh
+        shell: bash
+
+      - name: zip create
+        run: sudo zip -qq -r ./$GITHUB_SHA.zip ./build ./appspec.yml ./scripts
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Delete S3
+        run: aws s3 rm s3://$BUCKET_NAME/$PROJECT_NAME --recursive
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy To EC2 instance
+        run: aws deploy create-deployment
+          --application-name $CODE_DEPLOY_APP_NAME
+          --deployment-config-name CodeDeployDefault.HalfAtATime
+          --deployment-group-name $DEPLOYMENT_GROUP_NAME
+          --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip

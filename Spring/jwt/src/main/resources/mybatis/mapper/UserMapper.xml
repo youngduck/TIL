@@ -26,14 +26,14 @@
 
     <!-- 회원 등록 -->
     <insert id="insert">
-        INSERT INTO user( user_id, user_pw, name, email )
+        INSERT INTO COM_STD_1( user_id, user_pw, name, email )
         VALUES ( #{userId}, #{userPw}, #{name} ,#{email} )
     </insert>
 
     <!-- 회원 조회 -->
     <select id="select" resultType="Users">
         SELECT *
-        FROM user
+        FROM COM_STD_1
         WHERE no = #{no}
     </select>
 
@@ -48,20 +48,20 @@
               ,reg_date
               ,upd_date
               ,auth
-        FROM user u LEFT OUTER JOIN user_auth auth 
+        FROM COM_STD_1 u LEFT OUTER JOIN COM_STD_1_AUTH auth 
                     ON u.user_id = auth.user_id
         WHERE u.user_id = #{userId}
     </select>
 
     <!-- 회원 권한 등록 -->
     <insert id="insertAuth">
-        INSERT INTO user_auth( user_id, auth ) 
+        INSERT INTO COM_STD_1_AUTH( user_id, auth ) 
         VALUES ( #{userId}, #{auth} )
     </insert>
 
     <!-- 회원 수정 -->
     <update id="update">
-        UPDATE user
+        UPDATE COM_STD_1
            SET user_id = #{userId}
               ,user_pw = #{userPw}
               ,name = #{name}
@@ -69,11 +69,21 @@
         WHERE user_id = #{userId}
     </update>
 
-
     <!-- 회원 삭제 -->
     <delete id="delete">
-        DELETE FROM user
+        DELETE FROM COM_STD_1
         WHERE user_id = #{userId}
     </delete>
+
+    
+    <!-- 회원 중복 조회 -->
+    <select id="findById">
+        SELECT no
+             , user_id
+             , name
+             , email
+        FROM COM_STD_1 
+        WHERE user_id = #{userId}
+    </select>
 
 </mapper>

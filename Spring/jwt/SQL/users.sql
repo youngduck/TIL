@@ -25,6 +25,10 @@ CREATE TABLE `user` (
 INSERT INTO user ( user_id, user_pw, name, email )
 VALUES ( 'user', '123456', '사용자', 'user@mail.com' );
 
+-- 카카오 김영덕 하드코딩 데이터
+INSERT INTO user ( user_id, user_pw, name, email )
+VALUES ( '3593874675', '123456', '카카오김영덕', 'kakao@mail.com' );
+
 -- 관리자
 INSERT INTO user ( user_id, user_pw, name, email )
 VALUES ( 'admin', '123456', '관리자', 'admin@mail.com' );
