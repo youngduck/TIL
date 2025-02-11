@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pr": "nodemon ./Z_TEST/ProgrammersTest.js",
-    "boj": "nodemon ./Z_TEST/BOJTest.js"
+    "boj": "nodemon ./Z_TEST/BOJTest.js",
+    "leet": "nodemon ./Z_TEST/LEET_test.JS"
   },
   "keywords": [],
   "author": "",
